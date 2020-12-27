@@ -1,1 +1,40 @@
-test!!!   
+import itertools  
+from itertools import permutations,combinations,product
+
+
+
+
+def unique(iterable):
+    seen = set()
+    for x in iterable:
+        if x in seen:
+            continue
+        seen.add(x)
+        yield x
+        
+def Solution(S):
+    Vsamples = ["A","E","I","O","U"]    
+    Vs = []; Cs = []
+    for c in S:
+        if c in Vsamples:
+            Vs.append(c)
+        else:
+            Cs.append(c)
+            
+    LenVs = len(Vs); LenCs = len(Cs)
+    if LenVs - LenCs > 0 or LenCs -LenVs >1: 
+        return 0
+    
+    VPermutations =[]
+    for a in unique(permutations(Vs)):
+        VPermutations.append(a)
+    Vlen = len(VPermutations) 
+    
+    CPermutations =[]
+    for a in unique(permutations(Cs)):
+        CPermutations.append(a)
+    Clen = len(CPermutations) 
+    
+    count = Vlen * Clen
+    # print(Vs,Cs,Vlen,Clen)
+    return count
